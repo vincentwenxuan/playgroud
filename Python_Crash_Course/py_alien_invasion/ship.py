@@ -17,7 +17,12 @@ class Ship(object):
         self.rect.bottom = self.screen_rect.bottom
 
         # ship movement: int either + or - 
-        self.set_speed(0,0)
+        self.moving_left = False
+        self.moving_right = False
+        self.moving_up = False
+        self.moving_down = False
+
+        self.set_speed(1,1)
 
     def blitme(self):
         ''' Draw the ship '''
@@ -41,7 +46,13 @@ class Ship(object):
             self.speedy = y_speed
 
     def update(self):
-        self.rect.centerx += self.speedx
-        self.rect.centery += self.speedy
-        
+        if self.moving_left == True:
+            self.rect.centerx += -self.speedx
+        if self.moving_right == True:
+            self.rect.centerx += self.speedx
+        if self.moving_up == True:
+            self.rect.centery += -self.speedy
+        if self.moving_down == True:
+            self.rect.centery += self.speedy
+
 

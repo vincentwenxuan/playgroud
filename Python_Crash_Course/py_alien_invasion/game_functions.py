@@ -10,23 +10,22 @@ def check_event(player_ship):
             sys.exit()
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT:
-                player_ship.set_speed(1,None)
+                player_ship.moving_right = True
             elif event.key == pygame.K_LEFT:
-                player_ship.set_speed(-1,None)
+                player_ship.moving_left = True
             elif event.key == pygame.K_UP:
-                pass
-                # disable vertical movement
-                #player_ship.set_speed(None,-1)
+                player_ship.moving_up = True
             elif event.key == pygame.K_DOWN:
-                pass
-                # disable vertical movement
-                #player_ship.set_speed(None,1)
+                player_ship.moving_down = True
         elif event.type == pygame.KEYUP:  
             if event.key == pygame.K_RIGHT:
-                player_ship.set_speed(0,None)
+                player_ship.moving_right = False
             if event.key == pygame.K_LEFT:
-                player_ship.set_speed(0,None)
-
+                player_ship.moving_left = False
+            if event.key == pygame.K_UP:
+                player_ship.moving_up = False
+            if event.key == pygame.K_DOWN:
+                player_ship.moving_down = False
 def update_screen(ai_settings, screen, player_ship):
     ''' update all elements in screen according to settings '''
 
