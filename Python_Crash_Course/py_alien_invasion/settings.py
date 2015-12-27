@@ -13,4 +13,7 @@ class Settings(object):
         self.player_speed = (1.5,0.5)
         
         # bullet settings
-        
+        self.bullet_speed = 1 # y speed only
+        self.bullet_width = 3
+        self.bullet_height = 15
+        self.bullet_color = (230,230,230)

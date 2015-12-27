@@ -1,5 +1,8 @@
 import pygame
 
+from bullet import Bullet
+
+
 class Ship(object):
     """docstring for Ship"""
     def __init__(self, screen, settings):
@@ -73,3 +76,8 @@ class Ship(object):
         self.set_display_position(self.real_positionx, self.real_positiony)
 
 
+
+    def fire_bullet(self, bullets_group):
+        ''' fire bullet, add bullet into bullets group '''
+        new_bullet = Bullet(self.screen, self.settings, self)
+        bullets_group.add(new_bullet)
