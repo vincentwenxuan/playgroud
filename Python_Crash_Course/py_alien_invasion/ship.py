@@ -13,14 +13,20 @@ class Ship(object):
         self.rect = self.surface.get_rect()
         self.screen_rect = screen.get_rect()
 
-        # Start each new ship at the button center
-        self.set_display_positionx(self.screen_rect.centerx,0)
-        self.rect.bottom = self.screen_rect.bottom
+        # initialize ship real and display position
+        self.init_position()
 
+        # initialize ship speed and movement state
+        self.init_movement()
+
+    def init_position(self):
         # the real postion (since display position only take int)
         self.real_positionx = float(self.screen_rect.centerx)
-        self.real_positiony = float(self.screen_rect.centery)
-
+        self.real_positiony = float(self.screen_rect.bottom - self.surface.get_height()*0.5)
+        # Start each new ship at the button center
+        self.set_display_position(self.real_positionx,self.real_positiony)
+   
+    def init_movement(self):
         # ship movement 
         self.moving_left = False
         self.moving_right = False
@@ -28,6 +34,8 @@ class Ship(object):
         self.moving_down = False
 
         self.set_speed(self.settings.player_speed[0],self.settings.player_speed[1])
+
+    
 
     def blitme(self):
         ''' Draw the ship '''
@@ -39,7 +47,7 @@ class Ship(object):
         scaled_size = (int(current_size[0]*scale), int(current_size[1]*scale))
         self.surface = pygame.transform.scale(self.surface,scaled_size)
 
-    def set_display_positionx(self, centerx,centery):
+    def set_display_position(self, centerx, centery):
         ''' set ship center x coordinate '''
         self.rect.centerx = int(centerx)
         self.rect.centery = int(centery)
@@ -53,15 +61,15 @@ class Ship(object):
 
     def update(self):
         # update real movement and display movement 
-        if self.moving_left == True :
+        if self.moving_left and self.rect.left > self.screen_rect.left:
             self.real_positionx += -self.speedx
-        if self.moving_right == True:
+        if self.moving_right and self.rect.right < self.screen_rect.right:
             self.real_positionx += self.speedx
-        if self.moving_up == True:
+        if self.moving_up and self.rect.top > self.screen_rect.top:
             self.real_positiony += -self.speedy
-        if self.moving_down == True:
+        if self.moving_down and self.rect.bottom < self.screen_rect.bottom:
             self.real_positiony += self.speedy
 
-        self.set_display_positionx(self.real_positionx, self.real_positiony)
+        self.set_display_position(self.real_positionx, self.real_positiony)
 
 
