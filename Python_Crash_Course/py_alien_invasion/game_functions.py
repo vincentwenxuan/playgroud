@@ -72,6 +72,10 @@ def update_ships(player_ship):
     # movement update 
     player_ship.update()
 
+def update_aliens(aliens):
+    ''' update full fleet of aliens'''
+    aliens.update()
+
 
 def create_fleet(screen, ai_settings, aliens):
     ''' create a full fleet of aliens '''

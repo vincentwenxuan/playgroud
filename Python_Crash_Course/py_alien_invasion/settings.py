@@ -22,3 +22,7 @@ class Settings(object):
 
         # alien settings
         self.alien_size = 0.07 
+        self.alien_speed_x = 0.7
+        self.alien_drop_y = 30
+        self.fleet_direction = 1 # right=1, left=-1
+        
