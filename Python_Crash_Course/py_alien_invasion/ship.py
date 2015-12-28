@@ -39,7 +39,6 @@ class Ship(object):
         self.set_speed(self.settings.player_speed[0],self.settings.player_speed[1])
 
     
-
     def blitme(self):
         ''' Draw the ship '''
         self.screen.blit(self.surface, self.rect)
@@ -79,5 +78,11 @@ class Ship(object):
 
     def fire_bullet(self, bullets_group):
         ''' fire bullet, add bullet into bullets group '''
-        new_bullet = Bullet(self.screen, self.settings, self)
-        bullets_group.add(new_bullet)
+
+        if len(bullets_group) < self.settings.max_bullets:
+            new_bullet = Bullet(self.screen, self.settings, self)
+            bullets_group.add(new_bullet)
+
+
+
+

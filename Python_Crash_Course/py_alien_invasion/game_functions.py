@@ -39,7 +39,7 @@ def check_keyup_event(event,player_ship):
         player_ship.moving_down = False
 
 
-def update_screen(ai_settings, screen, player_ship, bullets):
+def update_screen(ai_settings, screen, player_ship, bullets, alien):
     ''' update all elements in screen according to settings '''
 
     # draw screen
@@ -47,6 +47,9 @@ def update_screen(ai_settings, screen, player_ship, bullets):
 
     # draw player
     player_ship.blitme()
+
+    # draw alien
+    alien.blitme()
     
     # draw bullet
     for bullet in bullets.sprites():
@@ -62,4 +65,9 @@ def update_bullets(bullets):
     for bullet in bullets:
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
+
+def update_ships(player_ship):
+    # movement update 
+    player_ship.update()
+
 

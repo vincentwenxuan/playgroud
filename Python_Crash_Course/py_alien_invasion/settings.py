@@ -18,3 +18,7 @@ class Settings(object):
         self.bullet_width = 3
         self.bullet_height = 15
         self.bullet_color = (230,230,230)
+        self.max_bullets = 4
+
+        # alien settings
+        self.alien_size = 0.07 
