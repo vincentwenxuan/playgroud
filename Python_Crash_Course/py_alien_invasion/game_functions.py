@@ -2,6 +2,8 @@ import sys
 
 import pygame
 
+from alien import Alien
+
 def check_event(player_ship, bullets):
     ''' in charge of checking the even like mouse move or quit '''
 
@@ -39,7 +41,7 @@ def check_keyup_event(event,player_ship):
         player_ship.moving_down = False
 
 
-def update_screen(ai_settings, screen, player_ship, bullets, alien):
+def update_screen(ai_settings, screen, player_ship, bullets, aliens):
     ''' update all elements in screen according to settings '''
 
     # draw screen
@@ -49,7 +51,7 @@ def update_screen(ai_settings, screen, player_ship, bullets, alien):
     player_ship.blitme()
 
     # draw alien
-    alien.blitme()
+    aliens.draw(screen)
     
     # draw bullet
     for bullet in bullets.sprites():
@@ -69,5 +71,25 @@ def update_bullets(bullets):
 def update_ships(player_ship):
     # movement update 
     player_ship.update()
+
+
+def create_fleet(screen, ai_settings, aliens):
+    ''' create a full fleet of aliens '''
+    alien = Alien(screen, ai_settings)
+    alien_width = alien.rect.width
+    screen_width = ai_settings.screen_size[0]
+    available_space_x = screen_width - 2*alien_width
+    number_aliens_x = int(available_space_x / (2*alien_width)) 
+
+    # Create the first row of ships
+    for alien_number in range(number_aliens_x):
+        # create an alien and place it in the row
+        alien = Alien(screen, ai_settings)
+
+        alien_x_inrow =  alien_width + 2*alien_width*alien_number
+        alien.set_position(alien_x_inrow, y=None)
+        aliens.add(alien)
+
+
 
 

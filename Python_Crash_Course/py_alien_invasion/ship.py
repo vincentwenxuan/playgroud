@@ -11,9 +11,9 @@ class Ship(object):
         self.settings = settings
 
         #Load the ship image
-        self.surface = pygame.image.load('images/player.bmp')
+        self.image = pygame.image.load('images/player.bmp')
         self.resize_ship(self.settings.player_size)
-        self.rect = self.surface.get_rect()
+        self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
 
         # initialize ship real and display position
@@ -25,7 +25,7 @@ class Ship(object):
     def init_position(self):
         # the real postion (since display position only take int)
         self.real_positionx = float(self.screen_rect.centerx)
-        self.real_positiony = float(self.screen_rect.bottom - self.surface.get_height()*0.5)
+        self.real_positiony = float(self.screen_rect.bottom - self.image.get_height()*0.5)
         # Start each new ship at the button center
         self.set_display_position(self.real_positionx,self.real_positiony)
    
@@ -41,13 +41,13 @@ class Ship(object):
     
     def blitme(self):
         ''' Draw the ship '''
-        self.screen.blit(self.surface, self.rect)
+        self.screen.blit(self.image, self.rect)
 
     def resize_ship(self, scale):
-        ''' resize ship surface according to scale arg'''
-        current_size = self.surface.get_size()
+        ''' resize ship image according to scale arg'''
+        current_size = self.image.get_size()
         scaled_size = (int(current_size[0]*scale), int(current_size[1]*scale))
-        self.surface = pygame.transform.scale(self.surface,scaled_size)
+        self.image = pygame.transform.scale(self.image,scaled_size)
 
     def set_display_position(self, centerx, centery):
         ''' set ship center x coordinate '''
