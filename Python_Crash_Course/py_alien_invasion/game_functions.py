@@ -42,12 +42,24 @@ def check_keyup_event(event,player_ship):
 def update_screen(ai_settings, screen, player_ship, bullets):
     ''' update all elements in screen according to settings '''
 
+    # draw screen
     screen.fill(ai_settings.bg_color)
+
+    # draw player
     player_ship.blitme()
+    
+    # draw bullet
     for bullet in bullets.sprites():
         bullet.draw_bullet()
 
+    
+    # make the change!
     pygame.display.flip()
 
-
+def update_bullets(bullets):
+    ''' update bullets motion and delete unused bullets '''
+    bullets.update()
+    for bullet in bullets:
+        if bullet.rect.bottom <= 0:
+            bullets.remove(bullet)
 

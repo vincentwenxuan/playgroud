@@ -11,9 +11,10 @@ class Settings(object):
 
         # player ship settings
         self.player_speed = (1.5,0.5)
-        
+        self.player_size = 0.07
+
         # bullet settings
-        self.bullet_speed = 1 # y speed only
+        self.bullet_speed = 2.5 # y speed only
         self.bullet_width = 3
         self.bullet_height = 15
         self.bullet_color = (230,230,230)

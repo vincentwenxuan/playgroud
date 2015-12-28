@@ -12,7 +12,7 @@ class Ship(object):
 
         #Load the ship image
         self.surface = pygame.image.load('images/player.bmp')
-        self.resize_ship(0.1)
+        self.resize_ship(self.settings.player_size)
         self.rect = self.surface.get_rect()
         self.screen_rect = screen.get_rect()
 
