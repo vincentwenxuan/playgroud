@@ -26,3 +26,5 @@ class Settings(object):
         self.alien_drop_y = 30
         self.fleet_direction = 1 # right=1, left=-1
         
+        # stat settings
+        self.ships_limit = 3
