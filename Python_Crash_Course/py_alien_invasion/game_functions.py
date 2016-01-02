@@ -5,7 +5,7 @@ import pygame
 
 from alien import Alien
 
-def check_event(player_ship, bullets):
+def check_event(player_ship, aliens, bullets, play_button, stats, ai_settings, screen):
     ''' in charge of checking the even like mouse move or quit '''
 
     for event in pygame.event.get():
@@ -15,6 +15,27 @@ def check_event(player_ship, bullets):
             check_keydown_event(event,player_ship, bullets)
         elif event.type == pygame.KEYUP:  
             check_keyup_event(event,player_ship)
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            check_play_button(stats, play_button, aliens, bullets, ai_settings, player_ship, screen)
+
+def check_play_button(stats, play_button, aliens, bullets, ai_settings, player_ship, screen):
+    # TODO: defect: changed argument, too many arg, do multiple thing
+    mouse_x, mouse_y = pygame.mouse.get_pos()
+
+    button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
+    if button_clicked and not stats.game_active:
+        # reset and start the game
+        stats.reset_stats()
+        stats.game_active = True
+
+        # empty the list of aliens and bullets
+        aliens.empty()
+        bullets.empty()
+
+        # create a new fleet and center the ship
+        create_fleet(screen, ai_settings, aliens)
+        player_ship.init_position()
+
 
 def check_keydown_event(event,player_ship, bullets):
     '''check when key pressed'''
@@ -42,7 +63,7 @@ def check_keyup_event(event,player_ship):
         player_ship.moving_down = False
 
 
-def update_screen(ai_settings, screen, player_ship, bullets, aliens):
+def update_screen(ai_settings, stats, screen, player_ship, bullets, aliens, play_button):
     ''' update all elements in screen according to settings '''
 
     # draw screen
@@ -58,6 +79,9 @@ def update_screen(ai_settings, screen, player_ship, bullets, aliens):
     for bullet in bullets.sprites():
         bullet.draw_bullet()
 
+    # draw playbutton if game is not active
+    if not stats.game_active:
+        play_button.draw_button()
     
     # make the change!
     pygame.display.flip()

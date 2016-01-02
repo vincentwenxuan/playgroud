@@ -23,6 +23,7 @@ class Ship(object):
         self.init_movement()
 
     def init_position(self):
+        """ initialize the ship to be the center of screen """
         # the real postion (since display position only take int)
         self.real_positionx = float(self.screen_rect.centerx)
         self.real_positiony = float(self.screen_rect.bottom - self.image.get_height()*0.5)
