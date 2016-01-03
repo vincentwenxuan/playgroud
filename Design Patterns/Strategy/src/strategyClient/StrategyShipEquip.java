@@ -1,4 +1,4 @@
-package try_Strategy;
+package strategyClient;
 
 
 import guns.MachineGun;
@@ -9,7 +9,7 @@ import ships.Ship;
 import bombs.SmallBomb;
 
 
-public class Strategy_client {
+public class StrategyShipEquip {
 
 	public static void main(String[] args) {
 
